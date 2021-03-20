@@ -72,6 +72,7 @@ import {
     processStockPrices,
     displayStockMarketContent
 } from "./StockMarket/StockMarket";
+import { displayStormTechLabContent } from "./StormTechLab/LabHelper";
 import { Terminal, postNetburnerText } from "./Terminal";
 import { Sleeve } from "./PersonObjects/Sleeve/Sleeve";
 import {
@@ -211,6 +212,7 @@ const Engine = {
         activeScriptsContent:           null,
         hacknetNodesContent:            null,
         createProgramContent:           null,
+        stormtechLabContent:            null,
         factionsContent:                null,
         factionContent:                 null,
         augmentationsContent:           null,
@@ -285,6 +287,14 @@ const Engine = {
         displayCreateProgramContent();
         routing.navigateTo(Page.CreateProgram);
         MainMenuLinks.CreateProgram.classList.add("active");
+    },
+
+    loadStormTechLabContent: function() {
+        Engine.hideAllContent();
+        Engine.Display.stormtechLabContent.style.display = "block";
+        routing.navigateTo(Page.StormTechLab);
+        MainMenuLinks.StormTechLab.classList.add("active");
+        displayStormTechLabContent();
     },
 
     loadFactionsContent: function() {
@@ -485,6 +495,7 @@ const Engine = {
 
         clearHacknetNodesUI();
         Engine.Display.createProgramContent.style.display = "none";
+        Engine.Display.stormtechLabContent.style.display = "none";
 
         Engine.Display.factionsContent.style.display = "none";
 
@@ -536,6 +547,7 @@ const Engine = {
         MainMenuLinks.ScriptEditor.classList.remove("active");
         MainMenuLinks.ActiveScripts.classList.remove("active");
         MainMenuLinks.CreateProgram.classList.remove("active");
+        MainMenuLinks.StormTechLab.classList.remove("active");
         MainMenuLinks.Stats.classList.remove("active");
         MainMenuLinks.Factions.classList.remove("active");
         MainMenuLinks.Augmentations.classList.remove("active");
@@ -1151,8 +1163,8 @@ const Engine = {
             const timeOfflineString = convertTimeMsToTimeElapsedString(time);
             dialogBoxCreate(<>
                 Offline for {timeOfflineString}. While you were offline, your scripts generated
-                <span class='money-gold'> {numeralWrapper.formatMoney(offlineProductionFromScripts)} </span>
-                and your Hacknet Nodes generated <span class='money-gold'>{hacknetProdInfo}</span>.
+                <span className='money-gold'> {numeralWrapper.formatMoney(offlineProductionFromScripts)} </span>
+                and your Hacknet Nodes generated <span className='money-gold'>{hacknetProdInfo}</span>.
             </>);
             // Close main menu accordions for loaded game
             var visibleMenuTabs = [terminal, createScript, activeScripts, stats,
@@ -1249,6 +1261,9 @@ const Engine = {
         Engine.Display.createProgramContent = document.getElementById("create-program-container");
         Engine.Display.createProgramContent.style.display = "none";
 
+        Engine.Display.stormtechLabContent = document.getElementById("stormtech-lab-container");
+        Engine.Display.stormtechLabContent.style.display = "none";
+
         Engine.Display.factionsContent = document.getElementById("factions-container");
         Engine.Display.factionsContent.style.display = "none";
 
@@ -1333,6 +1348,11 @@ const Engine = {
 
         MainMenuLinks.CreateProgram.addEventListener("click", function() {
             Engine.loadCreateProgramContent();
+            return false;
+        });
+
+        MainMenuLinks.StormTechLab.addEventListener("click", function() {
+            Engine.loadStormTechLabContent();
             return false;
         });
 
