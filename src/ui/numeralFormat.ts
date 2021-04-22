@@ -1,4 +1,4 @@
-import * as numeral from 'numeral';
+import numeral from 'numeral';
 import 'numeral/locales/bg';
 import 'numeral/locales/cs';
 import 'numeral/locales/da-dk';

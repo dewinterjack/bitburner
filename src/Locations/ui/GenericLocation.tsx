@@ -24,6 +24,7 @@ import { IEngine }                  from "../../IEngine";
 import { IPlayer }                  from "../../PersonObjects/IPlayer";
 
 import { StdButton }                from "../../ui/React/StdButton";
+import { CorruptibleText }          from "./CorruptableText";
 
 type IProps = {
     engine: IEngine;
@@ -150,7 +151,7 @@ export class GenericLocation extends React.Component<IProps, any> {
         return (
             <div>
                 <StdButton onClick={this.props.returnToCity} style={this.btnStyle} text={"Return to World"} />
-                <h1>{this.props.loc.name}</h1>
+                <h1><CorruptibleText content={this.props.loc.name}></CorruptibleText></h1>
                 {locContent}
             </div>
         )
